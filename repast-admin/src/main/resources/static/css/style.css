@@ -5507,7 +5507,7 @@ del {
     }
 
     20% {
-        -webkit-transform: scaleY (1);
+        -webkit-transform: scaleY (0);
         transform: scaleY (1);
     }
 }
