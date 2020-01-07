@@ -380,34 +380,34 @@ public class Product extends BaseEntity
 		this.detailMobileHtml = detailMobileHtml;
 	}
 
-	public String getDetailMobileHtml() 
+	public String getDetailMobileHtml()
 	{
 		return detailMobileHtml;
 	}
-	public void setPromotionStartTime(Date promotionStartTime) 
+	public void setPromotionStartTime(Date promotionStartTime)
 	{
 		this.promotionStartTime = promotionStartTime;
 	}
 
-	public Date getPromotionStartTime() 
+	public Date getPromotionStartTime()
 	{
 		return promotionStartTime;
 	}
-	public void setPromotionEndTime(Date promotionEndTime) 
+	public void setPromotionEndTime(Date promotionEndTime)
 	{
 		this.promotionEndTime = promotionEndTime;
 	}
 
-	public Date getPromotionEndTime() 
+	public Date getPromotionEndTime()
 	{
 		return promotionEndTime;
 	}
-	public void setPromotionPerLimit(Integer promotionPerLimit) 
+	public void setPromotionPerLimit(Integer promotionPerLimit)
 	{
 		this.promotionPerLimit = promotionPerLimit;
 	}
 
-	public Integer getPromotionPerLimit() 
+	public Integer getPromotionPerLimit()
 	{
 		return promotionPerLimit;
 	}

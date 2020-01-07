@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aaa.repast.admin.project.system.productattributecategory.mapper.ProductAttributeCategoryMapper">
+    
+    <resultMap type="ProductAttributeCategory" id="ProductAttributeCategoryResult">
+        <result property="id"    column="id"    />
+        <result property="shopId"    column="shop_id"    />
+        <result property="name"    column="name"    />
+        <result property="attributeCount"    column="attribute_count"    />
+        <result property="paramCount"    column="param_count"    />
+    </resultMap>
+	
+	<sql id="selectProductAttributeCategoryVo">
+        select id, shop_id, name, attribute_count, param_count from pms_product_attribute_category
+    </sql>
+	
+    <select id="selectProductAttributeCategoryList" parameterType="ProductAttributeCategory" resultMap="ProductAttributeCategoryResult">
+        <include refid="selectProductAttributeCategoryVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="shopId != null "> and shop_id = #{shopId}</if>
+             <if test="name != null  and name != '' "> and name = #{name}</if>
+             <if test="attributeCount != null "> and attribute_count = #{attributeCount}</if>
+             <if test="paramCount != null "> and param_count = #{paramCount}</if>
+         </where>
+    </select>
+    
+    <select id="selectProductAttributeCategoryById" parameterType="Long" resultMap="ProductAttributeCategoryResult">
+        <include refid="selectProductAttributeCategoryVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertProductAttributeCategory" parameterType="ProductAttributeCategory">
+        insert into pms_product_attribute_category
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="shopId != null  ">shop_id,</if>
+			<if test="name != null  and name != ''  ">name,</if>
+			<if test="attributeCount != null  ">attribute_count,</if>
+			<if test="paramCount != null  ">param_count,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="shopId != null  ">#{shopId},</if>
+			<if test="name != null  and name != ''  ">#{name},</if>
+			<if test="attributeCount != null  ">#{attributeCount},</if>
+			<if test="paramCount != null  ">#{paramCount},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateProductAttributeCategory" parameterType="ProductAttributeCategory">
+        update pms_product_attribute_category
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="shopId != null  ">shop_id = #{shopId},</if>
+            <if test="name != null  and name != ''  ">name = #{name},</if>
+            <if test="attributeCount != null  ">attribute_count = #{attributeCount},</if>
+            <if test="paramCount != null  ">param_count = #{paramCount},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteProductAttributeCategoryById" parameterType="Long">
+        delete from pms_product_attribute_category where id = #{id}
+    </delete>
+	
+    <delete id="deleteProductAttributeCategoryByIds" parameterType="String">
+        delete from pms_product_attribute_category where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

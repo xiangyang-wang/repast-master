@@ -462,6 +462,13 @@
 	            	$.operate.submit(url, "post", "json", data);
             	});
             },
+			// 传递id
+			detialIdAAA: function(id) {
+					var url = $.common.isEmpty(id) ? $.table._option.otherUrl : $.table._option.otherUrl.replace("{id}", id);
+					var data = { "ids": id };
+					$.operate.submit(url, "post", "json", data);
+
+			},
             // 批量删除信息
             removeAll: function() {
         		var rows = $.common.isEmpty($.table._option.uniqueId) ? $.table.selectFirstColumns() : $.table.selectColumns($.table._option.uniqueId);

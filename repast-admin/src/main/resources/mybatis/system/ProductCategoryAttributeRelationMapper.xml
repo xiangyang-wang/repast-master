@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aaa.repast.admin.project.system.productattribute.mapper.ProductCategoryAttributeRelationMapper">
+    
+    <resultMap type="ProductCategoryAttributeRelation" id="ProductCategoryAttributeRelationResult">
+        <result property="id"    column="id"    />
+        <result property="shopId"    column="shop_id"    />
+        <result property="productCategoryId"    column="product_category_id"    />
+        <result property="productAttributeId"    column="product_attribute_id"    />
+    </resultMap>
+	
+	<sql id="selectProductCategoryAttributeRelationVo">
+        select id, shop_id, product_category_id, product_attribute_id from pms_product_category_attribute_relation
+    </sql>
+	
+    <select id="selectProductCategoryAttributeRelationList" parameterType="ProductCategoryAttributeRelation" resultMap="ProductCategoryAttributeRelationResult">
+        <include refid="selectProductCategoryAttributeRelationVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="shopId != null "> and shop_id = #{shopId}</if>
+             <if test="productCategoryId != null "> and product_category_id = #{productCategoryId}</if>
+             <if test="productAttributeId != null "> and product_attribute_id = #{productAttributeId}</if>
+         </where>
+    </select>
+    
+    <select id="selectProductCategoryAttributeRelationById" parameterType="Long" resultMap="ProductCategoryAttributeRelationResult">
+        <include refid="selectProductCategoryAttributeRelationVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertProductCategoryAttributeRelation" parameterType="ProductCategoryAttributeRelation">
+        insert into pms_product_category_attribute_relation
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="shopId != null  ">shop_id,</if>
+			<if test="productCategoryId != null  ">product_category_id,</if>
+			<if test="productAttributeId != null  ">product_attribute_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="shopId != null  ">#{shopId},</if>
+			<if test="productCategoryId != null  ">#{productCategoryId},</if>
+			<if test="productAttributeId != null  ">#{productAttributeId},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateProductCategoryAttributeRelation" parameterType="ProductCategoryAttributeRelation">
+        update pms_product_category_attribute_relation
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="shopId != null  ">shop_id = #{shopId},</if>
+            <if test="productCategoryId != null  ">product_category_id = #{productCategoryId},</if>
+            <if test="productAttributeId != null  ">product_attribute_id = #{productAttributeId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteProductCategoryAttributeRelationById" parameterType="Long">
+        delete from pms_product_category_attribute_relation where id = #{id}
+    </delete>
+	
+    <delete id="deleteProductCategoryAttributeRelationByIds" parameterType="String">
+        delete from pms_product_category_attribute_relation where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

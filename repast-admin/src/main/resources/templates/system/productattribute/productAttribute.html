@@ -1,0 +1,252 @@
+<!DOCTYPE HTML>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+    
+     <div class="container-div">
+		<div class="row">
+			<div class="col-sm-12 search-collapse">
+				<form id="formId">
+					<div class="select-list">
+						<ul>
+							<li>
+								店铺id：<input type="text" name="shopId"/>
+							</li>
+							<br><br><br>
+							<li>
+								商品类别id：<input type="text" name="productAttributeCategoryId"/>
+							</li>
+							<br><br><br>
+							<li>
+								属性名字：<input type="text" name="name"/>
+							</li>
+							<br><br><br>
+							<li>
+								属性选择类型：0->唯一；1->单选；2->多选：<input type="text" name="selectType"/>
+							</li>
+							<br><br><br>
+							<li>
+								属性录入方式：0->手工录入；1->从列表中选取：<input type="text" name="inputType"/>
+							</li>
+							<br><br><br>
+							<li>
+								可选值列表，以逗号隔开：<input type="text" name="inputList"/>
+							</li>
+							<br><br><br>
+							<li>
+								排序字段：最高的可以单独上传图片：<input type="text" name="sort"/>
+							</li>
+							<br><br><br>
+							<li>
+								分类筛选样式：1->普通；1->颜色：<input type="text" name="filterType"/>
+							</li>
+							<br><br><br>
+							<li>
+								检索类型；0->不需要进行检索；1->关键字检索；2->范围检索：<input type="text" name="searchType"/>
+							</li>
+							<br><br><br>
+							<li>
+								相同属性产品是否关联；0->不关联；1->关联：<input type="text" name="relatedStatus"/>
+							</li>
+							<br><br><br>
+							<li>
+								是否支持手动新增；0->不支持；1->支持：<input type="text" name="handAddStatus"/>
+							</li>
+							<br><br><br>
+							<li>
+								属性的类型；0->规格；1->参数：<input type="text" name="type"/>
+							</li>
+							<br><br><br>
+							<li>
+								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+								<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+							</li>
+						</ul>
+					</div>
+				</form>
+			</div>
+			
+	        <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
+				<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:productAttribute:add">
+					<i class="fa fa-plus"></i> 添加
+				</a>
+				<a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="system:productAttribute:edit">
+					<i class="fa fa-edit"></i> 修改
+				</a>
+				<a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:productAttribute:remove">
+					<i class="fa fa-remove"></i> 删除
+				</a>
+				<a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:productAttribute:export">
+						<i class="fa fa-download"></i> 导出
+				 </a>
+			</div>
+			<div class="col-sm-12 select-table table-striped">
+				<table id="bootstrap-table" data-mobile-responsive="true"></table>
+			</div>
+		</div>
+	</div>
+    <div th:include="include :: footer"></div>
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('system:productAttribute:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('system:productAttribute:remove')}]];
+        var prefix = ctx + "system/productAttribute";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+				exportUrl: prefix + "/export",
+                modalName: "商品属性参数",
+				search: false,
+		        showExport: true,
+                columns: [{
+		            checkbox: true
+		        },
+				{
+					field : 'id', 
+					title : 'id',
+					visible: false
+				},
+				{
+					field : 'shopId', 
+					title : '店铺id',
+					visible: false,
+					sortable: false
+				},
+				{
+					field : 'productAttributeCategoryId', 
+					title : '商品类别id',
+					visible: false,
+					sortable: false
+				},
+				{
+					field : 'name', 
+					title : '属性名字',
+					sortable: true
+				},
+				{
+					field : 'selectType',
+					//：0->唯一；1->单选；2->多选
+					title : '属性选择类型',
+					formatter: function(value, row, index) {
+						if (value==0){
+							return '唯一';
+						}else if (value==1){
+							return '单选';
+						}else {
+							return '多选';
+						}
+					} ,
+
+					sortable: true
+				},
+				{
+					field : 'inputType',
+					//0->手工录入；1->从列表中选取
+					title : '属性录入方式：',
+					formatter: function(value, row, index) {
+						if (value==0){
+							return '手工录入';
+						}else if (value==1){
+							return '从列表中选取';
+						}
+					} ,
+					sortable: true
+				},
+				{
+					field : 'inputList', 
+					title : '可选值列表，以逗号隔开',
+					sortable: true
+				},
+				{
+					field : 'sort', 
+					title : '排序字段',
+					sortable: true
+				},
+				{
+					field : 'filterType',
+					//1->普通；1->颜色
+					title : '分类筛选样式：',
+					formatter: function(value, row, index) {
+						if (value==0){
+							return '普通';
+						}else if (value==1){
+							return '颜色';
+						}
+					} ,
+					sortable: true
+				},
+				{
+					field : 'searchType',
+					//0->不需要进行检索；1->关键字检索；2->范围检索
+					title : '检索类型；',
+					formatter: function(value, row, index) {
+						if (value==0){
+							return '不需要进行检索';
+						}else if (value==1){
+							return '关键字检索';
+						}else {
+							return '范围检索';
+						}
+					} ,
+					sortable: false
+				},
+				{
+					field : 'relatedStatus',
+					//0->不关联；1->关联
+					title : '相同属性产品是否关联；',
+					formatter: function(value, row, index) {
+						if (value==0){
+							return '不关联';
+						}else if (value==1){
+							return '关联';
+						}
+					} ,
+					sortable: false
+
+				},
+				{
+					field : 'handAddStatus',
+					//0->不支持；1->支持
+					title : '是否支持手动新增；',
+					formatter: function(value, row, index) {
+						if (value==0){
+							return '不支持';
+						}else if (value==1){
+							return '支持';
+						}
+					} ,
+					sortable: false
+				},
+				{
+					field : 'type',
+					//0->规格；1->参数
+					title : '属性的类型；',
+					formatter: function(value, row, index) {
+						if (value==0){
+							return '规格';
+						}else if (value==1){
+							return '参数';
+						}
+					} ,
+					sortable: false
+				},
+		        {
+		            title: '操作',
+		            align: 'center',
+		            formatter: function(value, row, index) {
+		            	var actions = [];
+		            	actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.id + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a>');
+						return actions.join('');
+		            }
+		        }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>

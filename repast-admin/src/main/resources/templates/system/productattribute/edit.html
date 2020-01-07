@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-productAttribute-edit" th:object="${productAttribute}">
+            <input id="id" name="id" th:field="*{id}"  type="hidden">
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">店铺id：</label>
+				<div class="col-sm-8">
+					<input id="shopId" th:type="hidden" name="shopId" th:field="*{shopId}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">商品类别：</label>
+				<div class="col-sm-8">
+					<input id="val" th:type="hidden" name="productAttributeCategoryId" th:field="*{productAttributeCategoryId}" class="form-control" type="text">
+					<select id="sel" class="form-control" name="productAttributeCategoryId">
+						<option value="0">服装-T恤</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">属性名字：</label>
+				<div class="col-sm-8">
+					<input id="name" name="name" th:field="*{name}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">属性选择类型：0->唯一；1->单选；2->多选：</label>
+				<div class="col-sm-8">
+					<input id="selectType" name="selectType" th:field="*{selectType}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">属性录入方式：0->手工录入；1->从列表中选取：</label>
+				<div class="col-sm-8">
+					<input id="inputType" name="inputType" th:field="*{inputType}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">可选值列表，以逗号隔开：</label>
+				<div class="col-sm-8">
+					<input id="inputList" name="inputList" th:field="*{inputList}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">排序字段：最高的可以单独上传图片：</label>
+				<div class="col-sm-8">
+					<input id="sort" name="sort" th:field="*{sort}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">分类筛选样式：1->普通；1->颜色：</label>
+				<div class="col-sm-8">
+					<input id="filterType" name="filterType" th:field="*{filterType}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">检索类型；0->不需要进行检索；1->关键字检索；2->范围检索：</label>
+				<div class="col-sm-8">
+					<input id="searchType" name="searchType" th:field="*{searchType}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">相同属性产品是否关联；0->不关联；1->关联：</label>
+				<div class="col-sm-8">
+					<input id="relatedStatus" name="relatedStatus" th:field="*{relatedStatus}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">是否支持手动新增；0->不支持；1->支持：</label>
+				<div class="col-sm-8">
+					<input id="handAddStatus" name="handAddStatus" th:field="*{handAddStatus}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">属性的类型；0->规格；1->参数：</label>
+				<div class="col-sm-8">
+					<input id="type" name="type" th:field="*{type}" class="form-control" type="text">
+				</div>
+			</div>
+		</form>
+    </div>
+    <div th:include="include::footer"></div>
+    <script type="text/javascript">
+		var prefix = ctx + "system/productAttribute"
+		$("#form-productAttribute-edit").validate({
+			rules:{
+				xxxx:{
+					required:true,
+				},
+			}
+		});
+		
+		function submitHandler() {
+	        if ($.validate.form()) {
+	            $.operate.save(prefix + "/edit", $('#form-productAttribute-edit').serialize());
+	        }
+	    }
+		$(function () {
+			selectAttr();
+		});
+		function selectAttr() {
+			$.get("/system/productAttributeCategory/listAttr",function (data) {
+				console.info(data);
+				var sel = $("#sel");
+				var val = $("#val").val();
+				sel.empty();
+				for (var index in data) {
+					var position = data[index];
+					if (position.id == val) {
+						sel.append("<option value=" + position.id + ">" + position.name + "</option>");
+					}
+				}
+				for (var index in data) {
+					var position = data[index];
+					if (position.id != val) {
+						sel.append("<option value=" + position.id + ">" + position.name + "</option>");
+					}
+				}
+			},"json")
+		}
+		// function position() {
+		// 	$.post(prefix + "/position", function (data) {
+		// 		var sel = $("#positionId");
+		// 		var val = $("#ids").val();
+		// 		sel.empty();
+		// 		var positions = data.rows;
+		// 		for (var index in positions) {
+		// 			var position = positions[index];
+		// 			if (position.id == val) {
+		// 				sel.append("<option value=" + position.id + ">" + position.name + "</option>");
+		// 			}
+		// 		}
+		// 		for (var index in positions) {
+		// 			var position = positions[index];
+		// 			if (position.id != val) {
+		// 				sel.append("<option value=" + position.id + ">" + position.name + "</option>");
+		// 			}
+		// 		}
+		// 	}, "json");
+		// }
+	</script>
+</body>
+</html>

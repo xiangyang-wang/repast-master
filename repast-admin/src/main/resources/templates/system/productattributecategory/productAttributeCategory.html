@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+    
+     <div class="container-div">
+		<div class="row">
+			<div class="col-sm-12 search-collapse">
+				<form id="formId">
+					<div class="select-list">
+						<ul>
+							<li>
+								店铺id：<input type="text" name="shopId"/>
+							</li><br><br><br>
+
+							<li>
+								类别名字：<input type="text" name="name"/>
+							</li><br><br><br>
+
+							<li>
+								属性数量：<input type="text" name="attributeCount"/>
+							</li><br><br><br>
+
+							<li>
+								参数数量：<input type="text" name="paramCount"/>
+							</li><br><br><br>
+
+							<li>
+								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+								<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+							</li>
+						</ul>
+					</div>
+				</form>
+			</div>
+			
+	        <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
+				<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:productAttributeCategory:add">
+					<i class="fa fa-plus"></i> 添加
+				</a>
+				<a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="system:productAttributeCategory:edit">
+					<i class="fa fa-edit"></i> 修改
+				</a>
+				<a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:productAttributeCategory:remove">
+					<i class="fa fa-remove"></i> 删除
+				</a>
+				<a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:productAttributeCategory:export">
+						<i class="fa fa-download"></i> 导出
+				 </a>
+			</div>
+			<div class="col-sm-12 select-table table-striped">
+				<table id="bootstrap-table" data-mobile-responsive="true"></table>
+			</div>
+		</div>
+	</div>
+    <div th:include="include :: footer"></div>
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('system:productAttributeCategory:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('system:productAttributeCategory:remove')}]];
+        var prefix = ctx + "system/productAttributeCategory";
+        var otherPrefix=ctx+"system/productAttributeCategory/attributeList";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+				exportUrl: prefix + "/export",
+                modalName: "产品属性分类",
+				search: false,
+		        showExport: true,
+                columns: [{
+		            checkbox: true
+		        },
+				{
+					field : 'id', 
+					title : '编号',
+					visible: true
+				},
+				{
+					field : 'shopId', 
+					title : '店铺id',
+					sortable: false
+				},
+				{
+					field : 'name', 
+					title : '类别名称',
+					sortable: true
+				},
+				{
+					field : 'attributeCount', 
+					title : '属性数量',
+					sortable: true
+				},
+				{
+					field : 'paramCount', 
+					title : '参数数量',
+					sortable: true
+				},
+				{
+
+					title : '设置',
+					align: 'center',
+					formatter: function(value, row , index) {
+						var actions = [];
+
+						actions.push('<a class="btn btn-success btn-xs" href="#" onclick="attribute('+row.id+')">属性列表</a> ');
+						actions.push('<a class="btn btn-success btn-xs" href="#" onclick="parameter( '+ row.id +'  )">参数列表</a> ');
+						return actions.join('');
+					}
+				},
+		        {
+		            title: '操作',
+		            align: 'center',
+		            formatter: function(value, row, index) {
+		            	var actions = [];
+
+		            	actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.id + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a>');
+						return actions.join('');
+		            }
+		        }]
+            };
+            $.table.init(options);
+        });
+		// /*字典列表-详细*/
+		// function detail(dictId) {
+		// 	var url = otherPrefix + '/detail/' + dictId;
+		// 	createMenuItem(url, "字典数据");
+		// }
+		function attribute(id) {
+			var type=0;
+			$.get(otherPrefix,{attributeId:id,type:type},function (data) {
+				console.info(data);
+			},"json");
+		}
+		function parameter(id) {
+			var type=1;
+			$.get(otherPrefix,{attributeId:id,type:type},function (data) {
+				console.info(data);
+			},"json");
+		}
+    </script>
+</body>
+</html>

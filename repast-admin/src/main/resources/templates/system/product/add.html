@@ -11,196 +11,284 @@
 					<input id="shopId" name="shopId" class="form-control" type="text">
 				</div>
 			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">品牌ID：</label>
-				<div class="col-sm-8">
-					<input id="brandId" name="brandId" class="form-control" type="text">
-				</div>
-			</div>
-			<div class="form-group">	
+			<div class="form-group">
 				<label class="col-sm-3 control-label">产品类别ID：</label>
+				<!--				<div class="col-sm-8">-->
+				<!--					<input id="productCategoryId" name="productCategoryId" class="form-control" type="text">-->
+				<!--				</div>-->
 				<div class="col-sm-8">
-					<input id="productCategoryId" name="productCategoryId" class="form-control" type="text">
+					<select id="selectCategory" class="form-control" name="productCategoryId">
+						<option value="0">服装-T恤</option>
+					</select>
 				</div>
+
+
 			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">产品属性类别ID：</label>
-				<div class="col-sm-8">
-					<input id="productAttributeCategoryId" name="productAttributeCategoryId" class="form-control" type="text">
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">：</label>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">商品名称：</label>
 				<div class="col-sm-8">
 					<input id="name" name="name" class="form-control" type="text">
 				</div>
 			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">：</label>
-				<div class="col-sm-8">
-					<input id="pic" name="pic" class="form-control" type="text">
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">货号：</label>
-				<div class="col-sm-8">
-					<input id="productSn" name="productSn" class="form-control" type="text">
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">删除状态：0->未删除；1->已删除：</label>
-				<div class="col-sm-8">
-					<input id="deleteStatus" name="deleteStatus" class="form-control" type="text">
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">上架状态：0->下架；1->上架：</label>
-				<div class="col-sm-8">
-					<input id="publishStatus" name="publishStatus" class="form-control" type="text">
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">新品状态:0->不是新品；1->新品：</label>
-				<div class="col-sm-8">
-					<input id="newStatus" name="newStatus" class="form-control" type="text">
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">推荐状态；0->不推荐；1->推荐：</label>
-				<div class="col-sm-8">
-					<input id="recommandStatus" name="recommandStatus" class="form-control" type="text">
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">排序：</label>
-				<div class="col-sm-8">
-					<input id="sort" name="sort" class="form-control" type="text">
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">销量：</label>
-				<div class="col-sm-8">
-					<input id="sale" name="sale" class="form-control" type="text">
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">：</label>
-				<div class="col-sm-8">
-					<input id="price" name="price" class="form-control" type="text">
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">促销价格：</label>
-				<div class="col-sm-8">
-					<input id="promotionPrice" name="promotionPrice" class="form-control" type="text">
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">赠送的积分：</label>
-				<div class="col-sm-8">
-					<input id="giftPoint" name="giftPoint" class="form-control" type="text">
-				</div>
-			</div>
-			<div class="form-group">	
+			<div class="form-group">
 				<label class="col-sm-3 control-label">副标题：</label>
 				<div class="col-sm-8">
 					<input id="subTitle" name="subTitle" class="form-control" type="text">
 				</div>
 			</div>
+
 			<div class="form-group">	
+				<label class="col-sm-3 control-label">品牌ID：</label>
+<!--				<div class="col-sm-8">-->
+<!--					<input id="brandId" name="brandId" class="form-control" type="text">-->
+<!--				</div>-->
+
+				<div class="col-sm-8">
+					<select id="brandList" class="form-control" name="brandId">
+						<option value="0">服装-T恤</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
 				<label class="col-sm-3 control-label">商品描述：</label>
 				<div class="col-sm-8">
 					<input id="description" name="description" class="form-control" type="text">
 				</div>
 			</div>
-			<div class="form-group">	
+			<div class="form-group">
+				<label class="col-sm-3 control-label">货号：</label>
+				<div class="col-sm-8">
+					<input id="productSn" name="productSn" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">价格：</label>
+				<div class="col-sm-8">
+					<input id="price" name="price" class="form-control" type="text">
+				</div>
+			</div>
+
+			<div class="form-group">
 				<label class="col-sm-3 control-label">市场价：</label>
 				<div class="col-sm-8">
 					<input id="originalPrice" name="originalPrice" class="form-control" type="text">
 				</div>
 			</div>
-			<div class="form-group">	
+			<div class="form-group">
 				<label class="col-sm-3 control-label">库存：</label>
 				<div class="col-sm-8">
 					<input id="stock" name="stock" class="form-control" type="text">
 				</div>
 			</div>
-			<div class="form-group">	
+			<div class="form-group">
 				<label class="col-sm-3 control-label">库存预警值：</label>
 				<div class="col-sm-8">
 					<input id="lowStock" name="lowStock" class="form-control" type="text">
 				</div>
 			</div>
-			<div class="form-group">	
+
+			<div class="form-group">
 				<label class="col-sm-3 control-label">单位：</label>
 				<div class="col-sm-8">
 					<input id="unit" name="unit" class="form-control" type="text">
 				</div>
 			</div>
-			<div class="form-group">	
+			<div class="form-group">
 				<label class="col-sm-3 control-label">商品重量，默认为克：</label>
 				<div class="col-sm-8">
 					<input id="weight" name="weight" class="form-control" type="text">
 				</div>
 			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">以逗号分割的产品服务：1->无忧退货；2->快速退款；3->免费包邮：</label>
+
+			<div class="form-group">
+				<label class="col-sm-3 control-label">排序：</label>
 				<div class="col-sm-8">
-					<input id="serviceIds" name="serviceIds" class="form-control" type="text">
+					<input id="sort" name="sort" class="form-control" type="text">
 				</div>
 			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">：</label>
+
+			<div class="form-group">
+				<label class="col-sm-3 control-label">赠送的积分：</label>
+				<div class="col-sm-8">
+					<input id="giftPoint" name="giftPoint" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">上架状态：</label>
+				<!--				<div class="col-sm-8">-->
+				<!--					<input id="publishStatus" name="publishStatus" class="form-control" type="text">-->
+				<!--				</div>-->
+
+
+				<div class="col-sm-8">
+					<select class="form-control" name="publishStatus">
+						<option value="0">下架</option>
+						<option value="1">上架</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">新品状态:</label>
+				<!--				<div class="col-sm-8">-->
+				<!--					<input id="newStatus" name="newStatus" class="form-control" type="text">-->
+				<!--				</div>-->
+
+				<div class="col-sm-8">
+					<select class="form-control" name="newStatus">
+						<option value="0">不是新品</option>
+						<option value="1">新品</option>
+
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">商品推荐：</label>
+				<!--				<div class="col-sm-8">-->
+				<!--					<input id="recommandStatus" name="recommandStatus" class="form-control" type="text">-->
+				<!--				</div>-->
+
+				<div class="col-sm-8">
+					<select class="form-control" name="recommandStatus">
+						<option value="0">不推荐</option>
+						<option value="1">推荐</option>
+
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">产品服务：</label>
+				<!--				<div class="col-sm-8">-->
+				<!--					<input id="serviceIds" name="serviceIds" class="form-control" type="text">-->
+				<!--				</div>-->
+
+<!--				<div class="col-sm-8">-->
+<!--					<select class="form-control" name="serviceIds">-->
+<!--						<option value="1">无忧退货</option>-->
+<!--						<option value="2">快速退款</option>-->
+<!--						<option value="3">免费包邮</option>-->
+
+<!--					</select>-->
+<!--				</div>-->
+
+				<div class="col-sm-8">
+					<label class="check-box">
+						<input type="checkbox" value="1" name="serviceIds" id="inlineCheckbox1">无忧退货</label>
+					<label class="check-box">
+						<input type="checkbox" value="2" name="serviceIds" id="inlineCheckbox2">快速退款</label>
+					<label class="check-box">
+						<input type="checkbox" value="3" name="serviceIds" id="inlineCheckbox3">免费包邮</label>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-3 control-label">关键字：</label>
 				<div class="col-sm-8">
 					<input id="keywords" name="keywords" class="form-control" type="text">
 				</div>
 			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">：</label>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">商品注意：</label>
 				<div class="col-sm-8">
 					<input id="note" name="note" class="form-control" type="text">
 				</div>
 			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">画册id：</label>
-				<div class="col-sm-8">
-					<input id="albumId" name="albumId" class="form-control" type="text">
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">：</label>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">细节标题：</label>
 				<div class="col-sm-8">
 					<input id="detailTitle" name="detailTitle" class="form-control" type="text">
 				</div>
 			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">：</label>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">商品详情：</label>
 				<div class="col-sm-8">
 					<input id="detailDesc" name="detailDesc" class="form-control" type="text">
 				</div>
 			</div>
+
 			<div class="form-group">	
-				<label class="col-sm-3 control-label">产品详情网页内容：</label>
+				<label class="col-sm-3 control-label">产品属性类别ID：</label>
 				<div class="col-sm-8">
-					<input id="detailHtml" name="detailHtml" class="form-control" type="text">
+
+<!--					<input id="productAttributeCategoryId" name="productAttributeCategoryId" class="form-control" type="text">-->
+					<select class="form-control" name="productAttributeCategoryId">
+						<option value="0">未删除</option>
+
+					</select>
 				</div>
 			</div>
+
 			<div class="form-group">	
-				<label class="col-sm-3 control-label">移动端网页详情：</label>
+				<label class="col-sm-3 control-label">图片：</label>
 				<div class="col-sm-8">
-					<input id="detailMobileHtml" name="detailMobileHtml" class="form-control" type="text">
+					<input id="pic" name="pic" class="form-control" type="text">
 				</div>
 			</div>
+
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">删除状态：</label>
+<!--				<div class="col-sm-8">-->
+<!--					<input id="deleteStatus" name="deleteStatus" class="form-control" type="text">-->
+<!--				</div>-->
+
+				<div class="col-sm-8">
+					<select class="form-control" name="deleteStatus">
+						<option value="0">未删除</option>
+						<option value="1">已删除</option>
+
+					</select>
+				</div>
+			</div>
+
+
+			<div class="form-group" th:type="hidden">
+				<label class="col-sm-3 control-label">销量：</label>
+				<div class="col-sm-8">
+					<input id="sale" name="sale" class="form-control" type="text">
+				</div>
+			</div>
+
+
 			<div class="form-group">	
 				<label class="col-sm-3 control-label">促销开始时间：</label>
-				<div class="col-sm-8">
-					<input id="promotionStartTime" name="promotionStartTime" class="form-control" type="text">
+<!--				<div class="col-sm-8">-->
+<!--					<input id="promotionStartTime" name="promotionStartTime" class="form-control" type="text">-->
+<!--				</div>-->
+
+				<div class="form-group">
+					<div class="input-group date"> <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+
+						<input type="text" class="form-control" name="promotionStartTime" value="2020-01-01">
+					</div>
 				</div>
 			</div>
+
+<!--			<div class="col-md-12">-->
+<!--				<div class="form-group">-->
+<!--					<label class="col-sm-3 control-label">日期选择：</label>-->
+<!--					<div class="col-sm-9">-->
+<!--						<div class="form-group">-->
+<!--							<div class="input-group date"> <span class="input-group-addon"><i class="fa fa-calendar"></i></span>-->
+
+<!--								<input type="text" class="form-control" value="2018-04-20">-->
+<!--							</div>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--			</div>-->
+
+
+
 			<div class="form-group">	
 				<label class="col-sm-3 control-label">促销结束时间：</label>
-				<div class="col-sm-8">
-					<input id="promotionEndTime" name="promotionEndTime" class="form-control" type="text">
+<!--				<div class="col-sm-8">-->
+<!--					<input id="promotionEndTime" name="promotionEndTime" class="form-control" type="text">-->
+<!--				</div>-->
+
+				<div class="form-group">
+					<div class="input-group date"> <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+
+						<input type="text" class="form-control" name="promotionEndTime" value="2020-01-01">
+					</div>
 				</div>
 			</div>
 			<div class="form-group">	
@@ -208,32 +296,80 @@
 				<div class="col-sm-8">
 					<input id="promotionPerLimit" name="promotionPerLimit" class="form-control" type="text">
 				</div>
+
 			</div>
 			<div class="form-group">	
-				<label class="col-sm-3 control-label">促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->限时购：</label>
+				<label class="col-sm-3 control-label">促销类型：</label>
+<!--				<div class="col-sm-8">-->
+<!--					<input id="promotionType" name="promotionType" class="form-control" type="text">-->
+<!--				</div>-->
+
 				<div class="col-sm-8">
-					<input id="promotionType" name="promotionType" class="form-control" type="text">
+					<select class="form-control" name="promotionType">
+						<option value="0">没有促销使用原价</option>
+						<option value="1">使用促销价</option>
+						<option value="2">使用会员价</option>
+						<option value="3">使用阶梯价格</option>
+						<option value="4">使用满减价格</option>
+						<option value="4">限时购</option>
+					</select>
 				</div>
 			</div>
-			<div class="form-group">	
+			<div class="form-group">
+				<label class="col-sm-3 control-label">促销价格：</label>
+				<div class="col-sm-8">
+					<input id="promotionPrice" name="promotionPrice" class="form-control" type="text">
+				</div>
+			</div>
+
+
+			<div class="form-group">
+				<label class="col-sm-3 control-label">画册id：</label>
+				<div class="col-sm-8">
+					<input id="albumId" name="albumId" class="form-control" type="text">
+				</div>
+			</div>
+
+
+			<div class="form-group">
+				<label class="col-sm-3 control-label">产品详情网页内容：</label>
+				<div class="col-sm-8">
+					<input id="detailHtml" name="detailHtml" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">移动端网页详情：</label>
+				<div class="col-sm-8">
+					<input id="detailMobileHtml" name="detailMobileHtml" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group" th:type="hidden">
 				<label class="col-sm-3 control-label">品牌名称：</label>
 				<div class="col-sm-8">
-					<input id="brandName" name="brandName" class="form-control" type="text">
+					<input id="brandName" name="brandName"  class="form-control" type="text">
 				</div>
 			</div>
-			<div class="form-group">	
+			<div class="form-group" th:type="hidden">
 				<label class="col-sm-3 control-label">商品分类名称：</label>
 				<div class="col-sm-8">
-					<input id="productCategoryName" name="productCategoryName" class="form-control" type="text">
+					<input id="productCategoryName"  name="productCategoryName" class="form-control" type="text">
 				</div>
 			</div>
 			<div class="form-group">	
-				<label class="col-sm-3 control-label">币种，0-> 人民币;  1-> 积分：</label>
+				<label class="col-sm-3 control-label">币种：</label>
+<!--				<div class="col-sm-8">-->
+<!--					<input id="currency" name="currency" class="form-control" type="text">-->
+<!--				</div>-->
+
 				<div class="col-sm-8">
-					<input id="currency" name="currency" class="form-control" type="text">
+					<select class="form-control" name="currency">
+						<option value="0">人民币</option>
+						<option value="1">积分</option>
+					</select>
 				</div>
 			</div>
 		</form>
+
 	</div>
     <div th:include="include::footer"></div>
     <script type="text/javascript">
@@ -251,6 +387,67 @@
 	            $.operate.save(prefix + "/add", $('#form-product-add').serialize());
 	        }
 	    }
+		$(function () {
+			selectAttr();
+			selectCategory();
+			selectBrandList();
+			selectAttribute();
+		});
+		//列出所有属性类别
+		function selectAttr() {
+			$.get("/system/productAttributeCategory/listAttr",function (data) {
+				console.info(data);
+				var selectAttr =$("#selectAttr");
+				var brandName =$("#brandName");
+				selectAttr.empty();
+				for (var index in data){
+
+					var row=data[index];
+					selectAttr.append("<option value="+row.id+">" + row.name + "</option>");
+					brandName.val(row.name);
+				}
+			},"json")
+		}
+		//列出所有属性类别
+		function selectCategory() {
+			$.get("/system/productAttributeCategory/categoryList",function (data) {
+				console.info(data);
+				var selectAttr =$("#selectCategory");
+				var productCategoryName =$("#productCategoryName");
+				selectAttr.empty();
+				for (var index in data){
+
+					var row=data[index];
+					selectAttr.append("<option value="+row.id+">" + row.name + "</option>");
+					productCategoryName.val(row.name)
+				}
+			},"json")
+		}
+		//列出所有品牌
+		function selectBrandList() {
+			$.get("/system/brand/brandList",function (data) {
+				console.info(data);
+				var selectAttr =$("#brandList");
+				selectAttr.empty();
+				for (var index in data){
+
+					var row=data[index];
+					selectAttr.append("<option value="+row.id+">" + row.name + "</option>")
+				}
+			},"json")
+		}
+		function selectAttribute() {
+			$.get("/system/productAttribute/attributeList",function (data) {
+				console.info(data);
+				var selectAttr =$("#productAttributeCategoryId");
+				selectAttr.empty();
+				for (var index in data){
+
+					var row=data[index];
+					selectAttr.append("<option value="+row.id+">" + row.name + "</option>")
+				}
+			},"json")
+		}
 	</script>
 </body>
 </html>

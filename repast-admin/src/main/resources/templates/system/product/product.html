@@ -2,6 +2,11 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
+<style>
+	li{
+		float: left;
+	}
+</style>
 <body class="gray-bg">
     
      <div class="container-div">
@@ -27,11 +32,11 @@
 							</li>
 
 							<li>
-								：<input type="text" name="name"/>
+								名字：<input type="text" name="name"/>
 							</li>
 
 							<li>
-								：<input type="text" name="pic"/>
+								图片：<input type="text" name="pic"/>
 							</li>
 
 							<li>
@@ -63,7 +68,7 @@
 							</li>
 
 							<li>
-								：<input type="text" name="price"/>
+								价格：<input type="text" name="price"/>
 							</li>
 
 							<li>
@@ -107,11 +112,11 @@
 							</li>
 
 							<li>
-								：<input type="text" name="keywords"/>
+								搜索关键字：<input type="text" name="keywords"/>
 							</li>
 
 							<li>
-								：<input type="text" name="note"/>
+								注意事项：<input type="text" name="note"/>
 							</li>
 
 							<li>
@@ -119,11 +124,11 @@
 							</li>
 
 							<li>
-								：<input type="text" name="detailTitle"/>
+								细节标题：<input type="text" name="detailTitle"/>
 							</li>
 
 							<li>
-								：<input type="text" name="detailDesc"/>
+								细节排序：<input type="text" name="detailDesc"/>
 							</li>
 
 							<li>
@@ -211,37 +216,51 @@
 		        },
 				{
 					field : 'id', 
-					title : '',
+					title : 'id',
 					visible: false
 				},
 				{
 					field : 'shopId', 
 					title : '店铺ID',
+					visible: false,
 					sortable: true
 				},
 				{
 					field : 'brandId', 
 					title : '品牌ID',
+					visible: false,
 					sortable: true
 				},
 				{
 					field : 'productCategoryId', 
 					title : '产品类别ID',
+					visible: false,
 					sortable: true
 				},
 				{
 					field : 'productAttributeCategoryId', 
 					title : '产品属性类别ID',
+					visible: false,
+					sortable: true
+				},
+				{
+					field : 'brandName',
+					title : '品牌名称',
+					sortable: true
+				},
+				{
+					field : 'productCategoryName',
+					title : '商品分类名称',
 					sortable: true
 				},
 				{
 					field : 'name', 
-					title : '',
+					title : '名称',
 					sortable: true
 				},
 				{
 					field : 'pic', 
-					title : '',
+					title : '图片',
 					sortable: true
 				},
 				{
@@ -250,23 +269,55 @@
 					sortable: true
 				},
 				{
-					field : 'deleteStatus', 
-					title : '删除状态：0->未删除；1->已删除',
+					field : 'deleteStatus',
+					//0->未删除；1->已删除
+					title : '删除状态：',
+					formatter: function(value, row, index) {
+						if (value==0){
+							return '未删除';
+						}else if (value==1){
+							return '已删除';
+						}
+					} ,
 					sortable: true
 				},
 				{
-					field : 'publishStatus', 
-					title : '上架状态：0->下架；1->上架',
+					field : 'publishStatus',
+					//：0->下架；1->上架
+					title : '上架状态',
+					formatter: function(value, row, index) {
+						if (value==0){
+							return '下架';
+						}else {
+							return '上架';
+						}
+					} ,
 					sortable: true
 				},
 				{
-					field : 'newStatus', 
-					title : '新品状态:0->不是新品；1->新品',
+					field : 'newStatus',
+					//0->不是新品；1->新品
+					title : '新品状态:',
+					formatter: function(value, row, index) {
+						if (value==0){
+							return '不是新品';
+						}else if (value==1){
+							return '新品';
+						}
+					} ,
 					sortable: true
 				},
 				{
-					field : 'recommandStatus', 
-					title : '推荐状态；0->不推荐；1->推荐',
+					field : 'recommandStatus',
+					//0->不推荐；1->推荐
+					title : '推荐状态；',
+					formatter: function(value, row, index) {
+						if (value==0){
+							return '不推荐';
+						}else if (value==1){
+							return '推荐';
+						}
+					} ,
 					sortable: true
 				},
 				{
@@ -330,18 +381,28 @@
 					sortable: true
 				},
 				{
-					field : 'serviceIds', 
-					title : '以逗号分割的产品服务：1->无忧退货；2->快速退款；3->免费包邮',
+					field : 'serviceIds',
+					//1->无忧退货；2->快速退款；3->免费包邮
+					title : '以逗号分割的产品服务：',
+					formatter: function(value, row, index) {
+						if (value==0){
+							return '无忧退货';
+						}else if (value==1){
+							return '快速退款';
+						}else {
+							return '免费包邮';
+						}
+					} ,
 					sortable: true
 				},
 				{
 					field : 'keywords', 
-					title : '',
+					title : '关键字',
 					sortable: true
 				},
 				{
 					field : 'note', 
-					title : '',
+					title : '注意',
 					sortable: true
 				},
 				{
@@ -351,12 +412,12 @@
 				},
 				{
 					field : 'detailTitle', 
-					title : '',
+					title : '详细标题',
 					sortable: true
 				},
 				{
 					field : 'detailDesc', 
-					title : '',
+					title : '详细内容',
 					sortable: true
 				},
 				{
@@ -385,23 +446,38 @@
 					sortable: true
 				},
 				{
-					field : 'promotionType', 
-					title : '促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->限时购',
+					field : 'promotionType',
+					//0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->限时购
+					title : '促销类型：',
+					formatter: function(value, row, index) {
+						if (value==0){
+							return '没有促销使用原价';
+						}else if (value==1){
+							return '使用促销价';
+						}else if(value==2) {
+							return '使用会员价';
+						}else if(value==3) {
+							return '使用阶梯价格';
+						}else if(value==4) {
+							return '使用满减价格';
+						}else {
+							return '限时购';
+						}
+					} ,
 					sortable: true
 				},
+
 				{
-					field : 'brandName', 
-					title : '品牌名称',
-					sortable: true
-				},
-				{
-					field : 'productCategoryName', 
-					title : '商品分类名称',
-					sortable: true
-				},
-				{
-					field : 'currency', 
-					title : '币种，0-> 人民币;  1-> 积分',
+					field : 'currency',
+					//0-> 人民币;  1-> 积分
+					title : '币种，',
+					formatter: function(value, row, index) {
+						if (value==0){
+							return '人民币';
+						}else if (value==1){
+							return '积分';
+						}
+					} ,
 					sortable: true
 				},
 		        {
