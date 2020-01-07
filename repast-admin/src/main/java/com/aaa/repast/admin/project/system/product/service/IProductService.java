@@ -1,6 +1,8 @@
 package com.aaa.repast.admin.project.system.product.service;
 
 import com.aaa.repast.admin.project.system.product.domain.Product;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 /**
@@ -33,7 +35,7 @@ public interface IProductService
      * @param product 商品信息
      * @return 结果
      */
-	public int insertProduct(Product product);
+	public int insertProduct(MultipartFile file, Product product);
 	
 	/**
      * 修改商品

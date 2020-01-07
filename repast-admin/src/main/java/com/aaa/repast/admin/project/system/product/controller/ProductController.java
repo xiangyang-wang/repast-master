@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.aaa.repast.admin.project.system.product.domain.Product;
 import com.aaa.repast.admin.project.system.product.service.IProductService;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 商品 信息操作处理
@@ -85,9 +86,9 @@ public class ProductController extends BaseController
 	@Log(title = "商品", businessType = BusinessType.INSERT)
 	@PostMapping("/add")
 	@ResponseBody
-	public AjaxResult addSave(Product product)
+	public AjaxResult addSave(MultipartFile file, Product product)
 	{		
-		return toAjax(productService.insertProduct(product));
+		return toAjax(productService.insertProduct(file,product));
 	}
 
 	/**

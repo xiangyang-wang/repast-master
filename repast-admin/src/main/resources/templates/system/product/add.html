@@ -220,7 +220,7 @@
 			<div class="form-group">	
 				<label class="col-sm-3 control-label">图片：</label>
 				<div class="col-sm-8">
-					<input id="pic" name="pic" class="form-control" type="text">
+					<input id="pic" name="file" class="form-control" type="file">
 				</div>
 			</div>
 
@@ -383,9 +383,17 @@
 		});
 		
 		function submitHandler() {
-	        if ($.validate.form()) {
-	            $.operate.save(prefix + "/add", $('#form-product-add').serialize());
-	        }
+				$.ajax({
+					url: prefix + "/add",
+					data: new FormData($("#form-product-add")[0]),
+					type: "post",
+					contentType: false,
+					processData: false,
+					success: function (data) {
+						$.operate.successCallback(data);
+					}
+				});
+
 	    }
 		$(function () {
 			selectAttr();

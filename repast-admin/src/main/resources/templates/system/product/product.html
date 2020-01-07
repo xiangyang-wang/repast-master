@@ -189,6 +189,7 @@
 				<a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:product:export">
 						<i class="fa fa-download"></i> 导出
 				 </a>
+
 			</div>
 			<div class="col-sm-12 select-table table-striped">
 				<table id="bootstrap-table" data-mobile-responsive="true"></table>
@@ -261,7 +262,10 @@
 				{
 					field : 'pic', 
 					title : '图片',
-					sortable: true
+					sortable: true,
+					formatter: function(value, row, index) {
+						return '<img style="width: 20px;height: 20px" src='+row.pic+'>'
+					} ,
 				},
 				{
 					field : 'productSn', 
@@ -332,7 +336,7 @@
 				},
 				{
 					field : 'price', 
-					title : '',
+					title : '价格',
 					sortable: true
 				},
 				{
