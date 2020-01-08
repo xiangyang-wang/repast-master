@@ -1,12 +1,15 @@
 package com.aaa.repast.admin.project.system.brand.controller;
 
 import java.util.List;
+
 import com.aaa.repast.admin.framework.aspectj.lang.annotation.Log;
 import com.aaa.repast.admin.framework.aspectj.lang.enums.BusinessType;
 import com.aaa.repast.admin.framework.poi.ExcelUtil;
 import com.aaa.repast.admin.framework.web.controller.BaseController;
 import com.aaa.repast.admin.framework.web.domain.AjaxResult;
 import com.aaa.repast.admin.framework.web.page.TableDataInfo;
+import com.aaa.repast.admin.project.system.brand.Vo.BrandManagementVo;
+import io.swagger.models.auth.In;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.aaa.repast.admin.project.system.brand.domain.Brand;
 import com.aaa.repast.admin.project.system.brand.service.IBrandService;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 品牌 信息操作处理
@@ -44,16 +48,17 @@ public class BrandController extends BaseController
 	
 	/**
 	 * 查询品牌列表
+	 * @RequiresPermissions：用来验证权限的注解
 	 */
-	@RequiresPermissions("system:brand:list")
-	@PostMapping("/list")
-	@ResponseBody
-	public TableDataInfo list(Brand brand)
-	{
-		startPage();
-        List<Brand> list = brandService.selectBrandList(brand);
-		return getDataTable(list);
-	}
+//	@RequiresPermissions("system:brand:list")
+//	@PostMapping("/list")
+//	@ResponseBody
+//	public TableDataInfo list(Brand brand)
+//	{
+//		startPage();
+//        List<Brand> list = brandService.selectBrandList(brand);
+//		return getDataTable(list);
+//	}
 	
 	
 	/**
@@ -85,10 +90,12 @@ public class BrandController extends BaseController
 	@Log(title = "品牌", businessType = BusinessType.INSERT)
 	@PostMapping("/add")
 	@ResponseBody
-	public AjaxResult addSave(Brand brand)
+	public AjaxResult addSave(MultipartFile[] file,Brand brand)
 	{		
-		return toAjax(brandService.insertBrand(brand));
+		return toAjax(brandService.insertBrand(file,brand));
 	}
+
+
 
 	/**
 	 * 修改品牌
@@ -124,6 +131,80 @@ public class BrandController extends BaseController
 	{		
 		return toAjax(brandService.deleteBrandByIds(ids));
 	}
+
+
+
+
+
+	/**
+	 * @author WangShaodong
+	 * @description
+	 * 		单条删除方法
+	 * @date 2020/1/2
+	 */
+	/*@RequiresPermissions("system:brand:remove")
+	@Log(title = "品牌", businessType = BusinessType.DELETE)
+	@PostMapping( "/remove")
+	@ResponseBody
+	public AjaxResult remove(Long id)
+	{
+		return toAjax(brandService.deleteBrandById(id));
+	}*/
+
+
+
+	/**
+	 * @author WangShaodong
+	 * @description
+	 * 		查询品牌列表
+	 * @date 2019/12/30
+	 */
+	@RequiresPermissions("system:brand:list")
+	@PostMapping("/list")
+	@ResponseBody
+	public TableDataInfo selectBrandAll(BrandManagementVo brandManagementVo){
+		//分页开始
+		startPage();
+		List<BrandManagementVo> brandManagementVosList = brandService.selectBrandAll(brandManagementVo);
+		return getDataTable(brandManagementVosList);
+	}
+
+
+
+	/**
+	 * @author WangShaodong
+	 * @description
+	 * 		修改是否显示状态
+	 * @date 2020/1/6
+	 */
+	//@RequiresPermissions("system:brand:showStatus")
+	@Log(title = "品牌", businessType = BusinessType.UPDATE)
+	@PostMapping("/show_status")
+	@ResponseBody
+	public AjaxResult showStatus( Long id,Integer show_status)
+	{
+		return toAjax(brandService.showStatus(id,show_status));
+	}
+
+
+
+	/**
+	 * @author WangShaodong
+	 * @description
+	 * 		修改是否为品牌制造商
+	 * @date 2020/1/6
+	 */
+	//@RequiresPermissions("system:brand:showStatus")
+	@Log(title = "品牌", businessType = BusinessType.UPDATE)
+	@PostMapping("/factory_status")
+	@ResponseBody
+	public AjaxResult factoryStatus( Long id,Integer factory_status)
+	{
+		return toAjax(brandService.factoryStatus(id,factory_status));
+	}
+
+
+
 	/**
 	 * 查询品牌列表
 	 */
@@ -136,5 +217,7 @@ public class BrandController extends BaseController
 		List<Brand> list = brandService.selectBrandList(brand);
 		return list;
 	}
+
+
 
 }

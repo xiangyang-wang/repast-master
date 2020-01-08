@@ -1,6 +1,9 @@
 package com.aaa.repast.admin.project.system.brand.service;
 
 import com.aaa.repast.admin.project.system.brand.domain.Brand;
+import com.aaa.repast.admin.project.system.brand.Vo.BrandManagementVo;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 /**
@@ -33,7 +36,7 @@ public interface IBrandService
      * @param brand 品牌信息
      * @return 结果
      */
-	public int insertBrand(Brand brand);
+	public int insertBrand(MultipartFile[] file,Brand brand);
 	
 	/**
      * 修改品牌
@@ -50,5 +53,59 @@ public interface IBrandService
      * @return 结果
      */
 	public int deleteBrandByIds(String ids);
+
+
+	/**
+	 * @author WangShaodong
+	 * @description
+	 * 		单条删除方法
+	 * @date 2020/1/2
+	 */
+	/*public int deleteBrandById(Long id);*/
+
+
+	/**
+	 * @author WangShaodong
+	 * @description
+	 * 		查询品牌列表
+	 * @date 2019/12/30
+	 */
+	public List<BrandManagementVo> selectBrandAll(BrandManagementVo brandManagementVo);
+
+
+	/**
+	 * @author WangShaodong
+	 * @description
+	 * 		修改是否显示状态
+	 * @date 2020/1/6
+	 */
+	public int showStatus(Long id,Integer show_status);
+
+
+	/**
+	 * @author WangShaodong
+	 * @description
+	 * 		是否为品牌制造商
+	 * @date 2020/1/6
+	 */
+	public int factoryStatus (Long id, Integer factory_status);
+
+
+
+
+
+
+
+
+
+
+	/**
+	 * @author WangShaodong
+	 * @description
+	 * 		图片上传
+	 * @date 2020/1/3
+	 */
+//	public List<Map<String, Object>> addUpLoadAjax(MultipartFile[] file,BrandManagementVo brandManagementVo);
+
 	
 }

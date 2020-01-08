@@ -22,8 +22,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<sql id="selectBrandVo">
         select id, shop_id, name, first_letter, sort, factory_status, show_status, product_count, product_comment_count, logo, big_pic, brand_story from pms_brand
     </sql>
-	
-    <select id="selectBrandList" parameterType="Brand" resultMap="BrandResult">
+
+    <!--查询品牌列表-->
+    <!--<select id="selectBrandList" parameterType="Brand" resultMap="BrandResult">
         <include refid="selectBrandVo"/>
         <where>  
             <if test="id != null "> and id = #{id}</if>
@@ -39,13 +40,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              <if test="bigPic != null  and bigPic != '' "> and big_pic = #{bigPic}</if>
              <if test="brandStory != null  and brandStory != '' "> and brand_story = #{brandStory}</if>
          </where>
+    </select>-->
+
+
+    <!--此sql语句为自己改动-->
+
+    <select id="selectBrandAll" resultType="com.aaa.repast.admin.project.system.brand.Vo.BrandManagementVo">
+        select pb.id,pp.shop_id,pb.name,pb.first_letter,pb.sort,pb.factory_status,pb.show_status,pb.product_count,pb.product_comment_count,pb.logo,pb.big_pic,pb.brand_story
+				from pms_brand pb
+						left join pms_product pp on pb.id=pp.brand_id
+						left join pms_comment pc on pp.id=pc.product_id
+						group by pb.id
     </select>
-    
+
+
+
+
+
+
+    <!--查询品牌信息、搜索-->
     <select id="selectBrandById" parameterType="Long" resultMap="BrandResult">
         <include refid="selectBrandVo"/>
         where id = #{id}
     </select>
-        
+
+
+    <!--添加-->
     <insert id="insertBrand" parameterType="Brand">
         insert into pms_brand
 		<trim prefix="(" suffix=")" suffixOverrides=",">
@@ -77,7 +97,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="brandStory != null  and brandStory != ''  ">#{brandStory},</if>
          </trim>
     </insert>
-	 
+
+    <!--更新-->
     <update id="updateBrand" parameterType="Brand">
         update pms_brand
         <trim prefix="SET" suffixOverrides=",">
@@ -96,6 +117,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </update>
 
+    <!--根据品牌id删除-->
 	<delete id="deleteBrandById" parameterType="Long">
         delete from pms_brand where id = #{id}
     </delete>
@@ -106,5 +128,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
+
+
+
+
+    <!--修改是否显示状态-->
+    <update id="showStatus" parameterType="Brand" >
+        update pms_brand set show_status=#{show_status} where id=#{id}
+    </update>
+
+    <!--是否为品牌制造商-->
+    <update id="factoryStatus" parameterType="Brand" >
+        update pms_brand set factory_status=#{factory_status} where id=#{id}
+    </update>
     
+
+
 </mapper>

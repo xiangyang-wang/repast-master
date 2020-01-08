@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aaa.repast.admin.project.system.comment.mapper.CommentMapper">
+    
+    <resultMap type="Comment" id="CommentResult">
+        <result property="id"    column="id"    />
+        <result property="shopId"    column="shop_id"    />
+        <result property="orderId"    column="order_id"    />
+        <result property="productId"    column="product_id"    />
+        <result property="memberNickName"    column="member_nick_name"    />
+        <result property="productName"    column="product_name"    />
+        <result property="star"    column="star"    />
+        <result property="memberIp"    column="member_ip"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="showStatus"    column="show_status"    />
+        <result property="productAttribute"    column="product_attribute"    />
+        <result property="collectCouont"    column="collect_couont"    />
+        <result property="readCount"    column="read_count"    />
+        <result property="content"    column="content"    />
+        <result property="pics"    column="pics"    />
+        <result property="memberIcon"    column="member_icon"    />
+        <result property="replayCount"    column="replay_count"    />
+    </resultMap>
+	
+	<sql id="selectCommentVo">
+        select id, shop_id, order_id, product_id, member_nick_name, product_name, star, member_ip, create_time, show_status, product_attribute, collect_couont, read_count, content, pics, member_icon, replay_count from pms_comment
+    </sql>
+	
+    <select id="selectCommentList" parameterType="Comment" resultMap="CommentResult">
+        <include refid="selectCommentVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="shopId != null "> and shop_id = #{shopId}</if>
+             <if test="orderId != null "> and order_id = #{orderId}</if>
+             <if test="productId != null "> and product_id = #{productId}</if>
+             <if test="memberNickName != null  and memberNickName != '' "> and member_nick_name = #{memberNickName}</if>
+             <if test="productName != null  and productName != '' "> and product_name = #{productName}</if>
+             <if test="star != null "> and star = #{star}</if>
+             <if test="memberIp != null  and memberIp != '' "> and member_ip = #{memberIp}</if>
+             <if test="createTime != null "> and create_time = #{createTime}</if>
+             <if test="showStatus != null "> and show_status = #{showStatus}</if>
+             <if test="productAttribute != null  and productAttribute != '' "> and product_attribute = #{productAttribute}</if>
+             <if test="collectCouont != null "> and collect_couont = #{collectCouont}</if>
+             <if test="readCount != null "> and read_count = #{readCount}</if>
+             <if test="content != null  and content != '' "> and content = #{content}</if>
+             <if test="pics != null  and pics != '' "> and pics = #{pics}</if>
+             <if test="memberIcon != null  and memberIcon != '' "> and member_icon = #{memberIcon}</if>
+             <if test="replayCount != null "> and replay_count = #{replayCount}</if>
+         </where>
+    </select>
+    
+    <select id="selectCommentById" parameterType="Long" resultMap="CommentResult">
+        <include refid="selectCommentVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertComment" parameterType="Comment">
+        insert into pms_comment
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="shopId != null  ">shop_id,</if>
+			<if test="orderId != null  ">order_id,</if>
+			<if test="productId != null  ">product_id,</if>
+			<if test="memberNickName != null  and memberNickName != ''  ">member_nick_name,</if>
+			<if test="productName != null  and productName != ''  ">product_name,</if>
+			<if test="star != null  ">star,</if>
+			<if test="memberIp != null  and memberIp != ''  ">member_ip,</if>
+			<if test="createTime != null  ">create_time,</if>
+			<if test="showStatus != null  ">show_status,</if>
+			<if test="productAttribute != null  and productAttribute != ''  ">product_attribute,</if>
+			<if test="collectCouont != null  ">collect_couont,</if>
+			<if test="readCount != null  ">read_count,</if>
+			<if test="content != null  and content != ''  ">content,</if>
+			<if test="pics != null  and pics != ''  ">pics,</if>
+			<if test="memberIcon != null  and memberIcon != ''  ">member_icon,</if>
+			<if test="replayCount != null  ">replay_count,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="shopId != null  ">#{shopId},</if>
+			<if test="orderId != null  ">#{orderId},</if>
+			<if test="productId != null  ">#{productId},</if>
+			<if test="memberNickName != null  and memberNickName != ''  ">#{memberNickName},</if>
+			<if test="productName != null  and productName != ''  ">#{productName},</if>
+			<if test="star != null  ">#{star},</if>
+			<if test="memberIp != null  and memberIp != ''  ">#{memberIp},</if>
+			<if test="createTime != null  ">#{createTime},</if>
+			<if test="showStatus != null  ">#{showStatus},</if>
+			<if test="productAttribute != null  and productAttribute != ''  ">#{productAttribute},</if>
+			<if test="collectCouont != null  ">#{collectCouont},</if>
+			<if test="readCount != null  ">#{readCount},</if>
+			<if test="content != null  and content != ''  ">#{content},</if>
+			<if test="pics != null  and pics != ''  ">#{pics},</if>
+			<if test="memberIcon != null  and memberIcon != ''  ">#{memberIcon},</if>
+			<if test="replayCount != null  ">#{replayCount},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateComment" parameterType="Comment">
+        update pms_comment
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="shopId != null  ">shop_id = #{shopId},</if>
+            <if test="orderId != null  ">order_id = #{orderId},</if>
+            <if test="productId != null  ">product_id = #{productId},</if>
+            <if test="memberNickName != null  and memberNickName != ''  ">member_nick_name = #{memberNickName},</if>
+            <if test="productName != null  and productName != ''  ">product_name = #{productName},</if>
+            <if test="star != null  ">star = #{star},</if>
+            <if test="memberIp != null  and memberIp != ''  ">member_ip = #{memberIp},</if>
+            <if test="createTime != null  ">create_time = #{createTime},</if>
+            <if test="showStatus != null  ">show_status = #{showStatus},</if>
+            <if test="productAttribute != null  and productAttribute != ''  ">product_attribute = #{productAttribute},</if>
+            <if test="collectCouont != null  ">collect_couont = #{collectCouont},</if>
+            <if test="readCount != null  ">read_count = #{readCount},</if>
+            <if test="content != null  and content != ''  ">content = #{content},</if>
+            <if test="pics != null  and pics != ''  ">pics = #{pics},</if>
+            <if test="memberIcon != null  and memberIcon != ''  ">member_icon = #{memberIcon},</if>
+            <if test="replayCount != null  ">replay_count = #{replayCount},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteCommentById" parameterType="Long">
+        delete from pms_comment where id = #{id}
+    </delete>
+	
+    <delete id="deleteCommentByIds" parameterType="String">
+        delete from pms_comment where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

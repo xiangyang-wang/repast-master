@@ -14,9 +14,9 @@ public class Brand extends BaseEntity
 {
 	private static final long serialVersionUID = 1L;
 	
-	/**  */
+	/**主键id  */
 	private Long id;
-	/**  */
+	/**店铺id  */
 	private Long shopId;
 	/** 名称 */
 	private String name;

@@ -1,7 +1,11 @@
 package com.aaa.repast.admin.project.system.brand.mapper;
 
 import com.aaa.repast.admin.project.system.brand.domain.Brand;
-import java.util.List;	
+import com.aaa.repast.admin.project.system.brand.Vo.BrandManagementVo;
+import io.swagger.models.auth.In;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * 品牌 数据层
@@ -9,6 +13,7 @@ import java.util.List;
  * @author Seven Lee
  * @date 2019-12-28
  */
+@Repository
 public interface BrandMapper 
 {
 	/**
@@ -58,5 +63,33 @@ public interface BrandMapper
      * @return 结果
      */
 	public int deleteBrandByIds(String[] ids);
-	
+
+
+	/**
+	 * @author WangShaodong
+	 * @description
+	 * 		查询品牌列表
+	 * @date 2019/12/30
+	 */
+	public List<BrandManagementVo> selectBrandAll(BrandManagementVo brandManagementVo);
+
+	/**
+	 * @author WangShaodong
+	 * @description
+	 * 		修改是否显示状态
+	 * @date 2020/1/6
+	 */
+	public int showStatus(Long id,Integer show_status);
+
+
+	/**
+	 * @author WangShaodong
+	 * @description
+	 * 		是否为品牌制造商
+	 * @date 2020/1/6
+	 */
+	public int factoryStatus (Long id, Integer factory_status);
+
+
+
 }
