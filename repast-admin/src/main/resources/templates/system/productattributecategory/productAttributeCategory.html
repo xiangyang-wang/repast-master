@@ -54,6 +54,36 @@
 			</div>
 		</div>
 	</div>
+
+	 <!-- Modal -->
+	 <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		 <div class="modal-dialog" role="document">
+			 <div class="modal-content">
+				 <div class="modal-header">
+					 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						 <h4 class="modal-title" id="myModalLabel1">规格列表</h4>
+				 </div>
+				 <div class="modal-body">
+					 <table id="table1">
+						 <thead>
+						 <tr>
+							 <td> </td>
+							 <td> </td>
+						 </tr>
+						 </thead>
+						 <tbody id="tbody">
+
+						 </tbody>
+
+					 </table>
+				 </div>
+				 <div class="modal-footer">
+					 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						 <!-- <button type="button" class="btn btn-primary">Save changes</button>-->
+				 </div>
+			 </div>
+		 </div>
+	 </div>
     <div th:include="include :: footer"></div>
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('system:productAttributeCategory:edit')}]];
@@ -131,15 +161,45 @@
 		// 	createMenuItem(url, "字典数据");
 		// }
 		function attribute(id) {
+			$("#myModal1").modal();
 			var type=0;
 			$.get(otherPrefix,{attributeId:id,type:type},function (data) {
 				console.info(data);
+				var tbody = $("#tbody");
+				// 清空tbody 中的内容
+				tbody.empty();
+				var rows=data.rows;
+				for(var index in rows) {
+					var shuxing = rows[index];
+					console.info(shuxing.name)
+					// 创建一行
+					var tr = $("<tr></tr>");
+					// 往行中加入数据
+					tr.append("<td>" + shuxing.name + "</td>");
+					tr.append("<td>" + shuxing.inputList + "</td>");
+					tbody.append(tr);
+				}
 			},"json");
 		}
 		function parameter(id) {
+			$("#myModal1").modal();
 			var type=1;
 			$.get(otherPrefix,{attributeId:id,type:type},function (data) {
 				console.info(data);
+				var tbody = $("#tbody");
+				// 清空tbody 中的内容
+				tbody.empty();
+				var rows=data.rows;
+				for(var index in rows){
+					var canshu = rows[index];
+					console.info(canshu.name)
+					// 创建一行
+					var tr = $("<tr></tr>");
+					// 往行中加入数据
+					tr.append("<td>"+canshu.name+"</td>");
+					tr.append("<td>" + canshu.inputList + "</td>");
+					tbody.append(tr);
+				}
 			},"json");
 		}
     </script>
